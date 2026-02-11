@@ -1,0 +1,34 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+
+<h2>📝 Tasks</h2>
+
+<ul>
+{% for task in object_list %}
+    <li>
+        <span class="{% if task.completed %}completed{% endif %}">
+            {{ task.title }}
+        </span>
+        <span>
+            {% if task.completed %}
+                ✅ Done
+            {% else %}
+                ⏳ Pending
+            {% endif %}
+        </span>
+    </li>
+{% empty %}
+    <p>No tasks in this category.</p>
+{% endfor %}
+</ul>
+
+<a class="btn" href="{% url 'task-create' view.kwargs.category_id %}">
+    ➕ Add Task
+</a>
+
+<a class="btn" href="{% url 'category-list' %}">
+    ⬅ Back
+</a>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+
+<h2>🆕 Add New Item</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">💾 Save</button>
+</form>
+
+<a class="btn" href="{% url 'category-list' %}">
+    ⬅ Back
+</a>
+
+{% endblock %}
