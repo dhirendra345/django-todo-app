@@ -1,0 +1,6 @@
+{% if form.instance.pk %}
+    <a style="color:#ff3c3c;"
+       href="{% url 'list-delete' form.instance.pk %}">
+        Delete This List
+    </a>
+{% endif %}

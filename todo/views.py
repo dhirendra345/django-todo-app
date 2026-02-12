@@ -1,4 +1,4 @@
-from django.views.generic import ListView, CreateView, DeleteView
+from django.views.generic import ListView, CreateView, DeleteView,UpdateView
 from django.urls import reverse_lazy
 from .models import List, Task
 
@@ -46,6 +46,21 @@ class TaskCreateView(CreateView):
 class TaskDeleteView(DeleteView):
     model = Task
     template_name = 'todo/confirm_delete.html'
+
+    def get_success_url(self):
+        return reverse_lazy(
+            'task-list',
+            kwargs={'list_id': self.object.list.id}
+        )
+class ListUpdateView(UpdateView):
+    model = List
+    fields = ['name']
+    template_name = 'todo/task_form.html'
+    success_url = reverse_lazy('list-list')
+class TaskUpdateView(UpdateView):
+    model = Task
+    fields = ['list', 'title', 'description', 'completed']
+    template_name = 'todo/task_form.html'
 
     def get_success_url(self):
         return reverse_lazy(

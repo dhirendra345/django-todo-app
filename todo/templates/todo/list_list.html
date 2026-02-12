@@ -1,30 +1,26 @@
 {% extends 'todo/base.html' %}
-
 {% block content %}
 
-<h2>📋 Lists</h2>
+<h2>Your Lists</h2>
 
-<ul>
 {% for list in object_list %}
-    <li>
-        <span>{{ list.name }}</span>
+<div class="card">
+    <div class="title">{{ list.name }}</div>
 
-        <div>
-            <a class="btn" href="{% url 'task-list' list.id %}">
-                View Tasks
-            </a>
+    <div class="button-group">
+        <a class="btn btn-outline" href="{% url 'task-list' list.id %}">
+            View
+        </a>
 
-            <a class="btn" style="background:red;"
-               href="{% url 'list-delete' list.id %}">
-                Delete
-            </a>
-        </div>
-    </li>
+        <a class="btn btn-primary" href="{% url 'list-update' list.id %}">
+            Edit
+        </a>
+    </div>
+</div>
 {% endfor %}
-</ul>
 
-<a class="btn" href="{% url 'list-create' %}">
-    ➕ Add List
+<a class="btn btn-primary" href="{% url 'list-create' %}">
+    + Create New List
 </a>
 
 {% endblock %}
