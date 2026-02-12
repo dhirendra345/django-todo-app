@@ -2,64 +2,96 @@
 <html>
 <head>
     <title>To Do App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: #333;
+            font-family: 'Segoe UI', sans-serif;
+            background: #0f0f0f;
+            color: white;
         }
 
         .container {
-            width: 80%;
+            width: 92%;
+            max-width: 1000px;
             margin: 40px auto;
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
         h1 {
             text-align: center;
-            color: #444;
+            color: #ff7a00;
+            font-weight: 600;
+            letter-spacing: 1px;
         }
 
         h2 {
-            color: #555;
+            margin-top: 30px;
+            color: #ff7a00;
         }
 
-        a {
-            text-decoration: none;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 8px 14px;
-            margin-top: 10px;
-            background: #667eea;
-            color: white;
-            border-radius: 6px;
-            transition: 0.3s;
-        }
-
-        .btn:hover {
-            background: #5a67d8;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        li {
-            background: #f4f4f4;
-            padding: 12px;
-            margin: 8px 0;
-            border-radius: 8px;
+        .card {
+            background: #1a1a1a;
+            padding: 18px;
+            margin: 12px 0;
+            border-radius: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: 0.3s;
+            border: 1px solid #222;
+        }
+
+        .card:hover {
+            background: #222;
+        }
+
+        .title {
+            font-size: 16px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: #ff7a00;
+            color: black;
+        }
+
+        .btn-primary:hover {
+            background: #ff9500;
+        }
+
+        .btn-outline {
+            border: 1px solid #ff7a00;
+            color: #ff7a00;
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: #ff7a00;
+            color: black;
+        }
+
+        .danger-icon {
+            color: #ff3c3c;
+            cursor: pointer;
+            font-size: 18px;
         }
 
         .completed {
@@ -73,33 +105,46 @@
 
         input, textarea, select {
             width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            margin-bottom: 15px;
+            padding: 10px;
+            margin: 8px 0 16px 0;
             border-radius: 6px;
-            border: 1px solid #ccc;
+            border: 1px solid #333;
+            background: #1a1a1a;
+            color: white;
         }
 
         button {
-            padding: 10px 15px;
+            width: 100%;
+            padding: 10px;
+            background: #ff7a00;
             border: none;
-            background: #764ba2;
-            color: white;
             border-radius: 6px;
+            font-weight: bold;
             cursor: pointer;
         }
 
         button:hover {
-            background: #5b3a85;
+            background: #ff9500;
+        }
+
+        @media (max-width: 600px) {
+            .card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .button-group {
+                width: 100%;
+                justify-content: space-between;
+            }
         }
     </style>
-
 </head>
 <body>
 
 <div class="container">
-    <h1>To Do List Application</h1>
-    <hr>
+    <h1>To Do List App</h1>
     {% block content %}{% endblock %}
 </div>
 

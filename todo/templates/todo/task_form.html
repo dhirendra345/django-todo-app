@@ -2,16 +2,24 @@
 
 {% block content %}
 
-<h2>🆕 Add New Item</h2>
+<h2>Add New Item</h2>
 
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">💾 Save</button>
+    <button type="submit">Save</button>
 </form>
+{% if form.instance.pk %}
+    <div style="margin-top:20px;">
+        <a style="color:#ff3c3c;"
+           href="{% url 'task-delete' form.instance.pk %}">
+            Delete This Task
+        </a>
+    </div>
+{% endif %}
 
 <a class="btn" href="{% url 'list-list' %}">
-    ⬅ Back
+    Back
 </a>
 
 {% endblock %}

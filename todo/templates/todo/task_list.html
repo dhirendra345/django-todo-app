@@ -1,36 +1,24 @@
 {% extends 'todo/base.html' %}
-
 {% block content %}
 
-<h2>📝 Tasks</h2>
+<h2>Tasks</h2>
 
-<ul>
 {% for task in object_list %}
-    <li>
-    <span class="{% if task.completed %}completed{% endif %}">
+<div class="card">
+    <div class="title {% if task.completed %}completed{% endif %}">
         {{ task.title }}
-    </span>
+    </div>
 
-    <div>
-        <a class="btn" style="background:red;"
-           href="{% url 'task-delete' task.id %}">
-            Delete
+    <div class="button-group">
+        <a class="btn btn-outline" href="{% url 'task-update' task.id %}">
+            Edit
         </a>
     </div>
-</li>
-
-{% empty %}
-    <p>No tasks in this category.</p>
+</div>
 {% endfor %}
-</ul>
 
-<a class="btn" href="{% url 'task-create' view.kwargs.list_id %}">
-    ➕ Add Task
+<a class="btn btn-primary" href="{% url 'task-create' view.kwargs.list_id %}">
+    + Add Task
 </a>
-
-<a class="btn" href="{% url 'list-list' %}">
-    ⬅ Back
-</a>
-
 
 {% endblock %}
