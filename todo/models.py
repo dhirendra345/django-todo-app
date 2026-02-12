@@ -1,6 +1,6 @@
 from django.db import models
 
-class Category(models.Model):
+class List(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
@@ -8,8 +8,8 @@ class Category(models.Model):
 
 
 class Task(models.Model):
-    category = models.ForeignKey(
-        Category,
+    list = models.ForeignKey(
+        List,
         on_delete=models.CASCADE,
         related_name='tasks'
     )

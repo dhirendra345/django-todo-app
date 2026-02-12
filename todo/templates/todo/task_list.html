@@ -7,28 +7,30 @@
 <ul>
 {% for task in object_list %}
     <li>
-        <span class="{% if task.completed %}completed{% endif %}">
-            {{ task.title }}
-        </span>
-        <span>
-            {% if task.completed %}
-                ✅ Done
-            {% else %}
-                ⏳ Pending
-            {% endif %}
-        </span>
-    </li>
+    <span class="{% if task.completed %}completed{% endif %}">
+        {{ task.title }}
+    </span>
+
+    <div>
+        <a class="btn" style="background:red;"
+           href="{% url 'task-delete' task.id %}">
+            Delete
+        </a>
+    </div>
+</li>
+
 {% empty %}
     <p>No tasks in this category.</p>
 {% endfor %}
 </ul>
 
-<a class="btn" href="{% url 'task-create' view.kwargs.category_id %}">
+<a class="btn" href="{% url 'task-create' view.kwargs.list_id %}">
     ➕ Add Task
 </a>
 
-<a class="btn" href="{% url 'category-list' %}">
+<a class="btn" href="{% url 'list-list' %}">
     ⬅ Back
 </a>
+
 
 {% endblock %}

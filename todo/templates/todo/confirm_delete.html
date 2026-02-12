@@ -1,0 +1,16 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+
+<h2>⚠ Confirm Delete</h2>
+
+<p>Are you sure you want to delete this item?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, Delete</button>
+</form>
+
+<a class="btn" href="{% url 'list-list' %}">Cancel</a>
+
+{% endblock %}

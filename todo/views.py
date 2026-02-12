@@ -1,17 +1,24 @@
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DeleteView
 from django.urls import reverse_lazy
-from .models import Category, Task
-
-class CategoryListView(ListView):
-    model = Category
-    template_name = 'todo/category_list.html'
+from .models import List, Task
 
 
-class CategoryCreateView(CreateView):
-    model = Category
+class ListListView(ListView):
+    model = List
+    template_name = 'todo/list_list.html'
+
+
+class ListCreateView(CreateView):
+    model = List
     fields = ['name']
     template_name = 'todo/task_form.html'
-    success_url = reverse_lazy('category-list')
+    success_url = reverse_lazy('list-list')
+
+
+class ListDeleteView(DeleteView):
+    model = List
+    template_name = 'todo/confirm_delete.html'
+    success_url = reverse_lazy('list-list')
 
 
 class TaskListView(ListView):
@@ -20,17 +27,28 @@ class TaskListView(ListView):
 
     def get_queryset(self):
         return Task.objects.filter(
-            category_id=self.kwargs['category_id']
+            list_id=self.kwargs['list_id']
         )
 
 
 class TaskCreateView(CreateView):
     model = Task
-    fields = ['category', 'title', 'description', 'completed']
+    fields = ['list', 'title', 'description', 'completed']
     template_name = 'todo/task_form.html'
 
     def get_success_url(self):
         return reverse_lazy(
             'task-list',
-            kwargs={'category_id': self.object.category.id}
+            kwargs={'list_id': self.object.list.id}
+        )
+
+
+class TaskDeleteView(DeleteView):
+    model = Task
+    template_name = 'todo/confirm_delete.html'
+
+    def get_success_url(self):
+        return reverse_lazy(
+            'task-list',
+            kwargs={'list_id': self.object.list.id}
         )

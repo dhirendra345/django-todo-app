@@ -1,0 +1,30 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+
+<h2>📋 Lists</h2>
+
+<ul>
+{% for list in object_list %}
+    <li>
+        <span>{{ list.name }}</span>
+
+        <div>
+            <a class="btn" href="{% url 'task-list' list.id %}">
+                View Tasks
+            </a>
+
+            <a class="btn" style="background:red;"
+               href="{% url 'list-delete' list.id %}">
+                Delete
+            </a>
+        </div>
+    </li>
+{% endfor %}
+</ul>
+
+<a class="btn" href="{% url 'list-create' %}">
+    ➕ Add List
+</a>
+
+{% endblock %}
